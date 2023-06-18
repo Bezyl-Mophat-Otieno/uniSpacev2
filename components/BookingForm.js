@@ -21,7 +21,7 @@ const BookingForm = () => {
       <h1>Booking Form</h1>
       <DatePicker
         selected={selectedDate}
-        onChange={handleDateChange}
+        onChange={()=>setSelectedDate(handleDateChange)}
         minDate={nextDay}
         maxDate={twoDaysAhead}
         includeDates={allowedBookingDates}

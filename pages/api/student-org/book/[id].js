@@ -2,7 +2,7 @@ import dbConnect from "../../../../utils/mongodb";
 import Booking from '../../../../models/booking'
 import Venue from '../../../../models/venue'
 
-// Login
+// Bookings
 export default async function handler(req, res) {
 
     const {method,query:{id}} = req;
