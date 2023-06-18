@@ -13,9 +13,14 @@ export  default async function handler  (req,res){
      try {
 
        async function releaseVenue(venueName) {
-            const venue = await Venue.findOneAndUpdate({name:venueName})
-            venue.bookedStatus = false; // Set the status to false to indicate it's released
-            venue.save(); // Save the updated venue in the database
+            const venue = await Venue.findOneAndUpdate({name:venueName},{
+              bookedStatus:false
+            },{
+              new:true,
+              runValidators:true
+            })
+            // venue.bookedStatus = false; // Set the status to false to indicate it's released
+            // venue.save(); // Save the updated venue in the database
           }
 
 

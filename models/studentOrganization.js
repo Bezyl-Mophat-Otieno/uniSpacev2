@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-
+import mongoose from 'mongoose'
 //TODO: Add more fields later which is information provided by the representative of the student organization
 //TODO: Add field for mission 
 //TODO: Add field for vission
@@ -13,7 +12,7 @@ const studentOrganizationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    passkey: {
+    passkey: {  
         type: String,
         required: true,
     }

@@ -18,6 +18,10 @@ export default async function handler(req, res) {
                 const {passkey,name} = req.body;
                 //Getting an organization by the passed passkey from the request
                 const org = await StudentOrganization.findOne({passkey:passkey})
+                if(!org) {
+                    res.status(404).json("The Student Organization has yet to be registered , kindly contact the Deens Office");
+
+                }
                 if(name === org.name){
                     res.status(200).json("You have successfully Logged In");
 

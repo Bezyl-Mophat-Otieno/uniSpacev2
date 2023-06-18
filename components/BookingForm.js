@@ -15,13 +15,14 @@ const BookingForm = () => {
   twoDaysAhead.setDate(twoDaysAhead.getDate() + 2);
   const allowedBookingDates=[nextDay,twoDaysAhead]
 
+  console.log(selectedDate)
   return (
     <div>
       <h1>Booking Form</h1>
       <DatePicker
         selected={selectedDate}
         onChange={handleDateChange}
-        minDate={ne}
+        minDate={nextDay}
         maxDate={twoDaysAhead}
         includeDates={allowedBookingDates}
       />
