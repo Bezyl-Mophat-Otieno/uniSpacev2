@@ -1,18 +1,6 @@
 
 
 
-.main {
-
-    background: linear-gradient(
-      to bottom right,
-      rgba(2, 14, 49, 0.5),
-      rgba(3, 19, 68, 0.5),
-      rgba(4, 35, 129, 0.3),
-      rgba(231, 234, 243)
-      
-    )
-
-}
 
 .container {
   display: flex;
@@ -36,14 +24,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.qrContainer {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  text-align: center;
 }
 
 
@@ -83,7 +63,7 @@
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index:999;
   color: black;
 }
@@ -95,8 +75,9 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: 25px;
   margin: 0;
+  font-weight: bolder;
   color: black;
 }
 
@@ -115,6 +96,7 @@
 
 .input {
   width: 100%;
+  flex-wrap: wrap;
   padding: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -130,7 +112,7 @@
   cursor: pointer;
   margin: 4px;
 }
-.buttonAdm {
+/* .buttonAdm {
   width: 100%;
   padding: 10px;
   background-color: #121213;
@@ -139,7 +121,7 @@
   border-radius: 5px;
   cursor: pointer;
   margin: 4px;
-}
+} */
 
 .button:hover {
   background-color: #0056b3;

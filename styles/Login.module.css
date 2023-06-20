@@ -1,19 +1,4 @@
 
-
-
-.main {
-
-    background: linear-gradient(
-      to bottom right,
-      rgba(2, 14, 49, 0.5),
-      rgba(3, 19, 68, 0.5),
-      rgba(4, 35, 129, 0.3),
-      rgba(231, 234, 243)
-      
-    )
-
-}
-
 .container {
   display: flex;
   height: 100vh;
@@ -37,14 +22,6 @@
   justify-content: center;
   align-items: center;
 }
-.qrContainer {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  text-align: center;
-}
 
 
 .card-header {
@@ -62,12 +39,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.btnGroup {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .btn-primary {
   width: 100%;
@@ -95,9 +67,10 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: 25px;
   margin: 0;
   color: black;
+  font-weight: bolder;
 }
 
 .cardBody {
@@ -124,16 +97,6 @@
   width: 100%;
   padding: 10px;
   background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 4px;
-}
-.buttonAdm {
-  width: 100%;
-  padding: 10px;
-  background-color: #121213;
   color: #fff;
   border: none;
   border-radius: 5px;

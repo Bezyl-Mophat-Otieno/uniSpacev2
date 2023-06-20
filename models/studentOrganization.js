@@ -12,10 +12,15 @@ const studentOrganizationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    role:{
+        type:String,
+        default:"user"
+    },
     passkey: {  
         type: String,
         required: true,
-    }
+    },
+
 })
 
 export default mongoose.models.StudentOrganization || mongoose.model('StudentOrganization', studentOrganizationSchema)

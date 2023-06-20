@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     if(method === 'GET'){
         try {
             const allAdmins = await Admin.find();
-            res.status(200).json(allOrgs); 
+            res.status(200).json(allAdmins); 
         } catch (error) {
             res.status(500).json(error.message);
             
