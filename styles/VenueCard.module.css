@@ -1,0 +1,11 @@
+.card{
+border-radius: 10px;
+border:1px solid grey;
+margin:15px;
+background-color: white;
+
+}
+.card:hover{
+    border:1px solid blue;
+    z-index: 999;
+}

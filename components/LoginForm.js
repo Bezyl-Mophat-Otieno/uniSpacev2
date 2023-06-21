@@ -64,7 +64,7 @@ function LoginForm() {
         </form>
           <button type="submit" className={styles.buttonLog} onClick={handleLogin}>Login</button>
           <div className={'d-flex justify-content-center flex-row text-center'}>
-          <QRCodeGenerator/>
+          {/* <QRCodeGenerator/> */}
           </div>
       </div>
     </div>

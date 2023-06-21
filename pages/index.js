@@ -3,9 +3,6 @@ import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import  org2  from '@/public/org2.jpg';
 import LoginForm from '@/components/LoginForm';
-import Dashboard from '@/components/Dashboard';
-import Cards from '@/components/Card';
-import QRCodeGenerator from '@/components/QRCodeGenerator';
 
 
 // const inter = Inter({ subsets: ['latin'] })

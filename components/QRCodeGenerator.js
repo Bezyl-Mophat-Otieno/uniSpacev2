@@ -26,8 +26,6 @@ const QRCodeGenerator = () => {
   return (
     <div className={styles.qrContainer}>
       <QRCode value={qrValue} renderAs="canvas" id='qrEl'/>
-      <button onClick={download}>Download</button>
-      {url &&<Image src = {url} alt="qr" width={200} height={200} />}
     </div>
   );
 };

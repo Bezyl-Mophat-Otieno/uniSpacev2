@@ -21,12 +21,16 @@ function RegisterForm() {
 
       setSuccess(true)
       setError(false)
+      setName("")
+      setRole("")
 
 
       
     } catch (error) {
       setError(true)
       setSuccess(false)
+      setName("")
+      setRole("")
     }
 
   }
