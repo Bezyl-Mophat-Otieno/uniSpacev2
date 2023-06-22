@@ -1,53 +1,40 @@
 import React from 'react'
 import styles from '../styles/BookingHistory.module.css'
 import Link from 'next/link'
+import { Table } from 'react-bootstrap'
 function BookingHistoryTable() {
   return (
 <div className={styles.container}>
 <div className={styles.wrapper}>
-<table class="table table-striped table-hover table-bordered border-black">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <div className='d-flex justify-content-between' >
-        <Link href='#' className='btn btn-outline-success '> Edit </Link>
-        <Link href='#' className=' btn btn-outline-danger '> Delete </Link>
-     </div>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <div className='d-flex justify-content-between' >
-        <Link href='#' className='btn btn-outline-success '> Edit </Link>
-        <Link href='#' className=' btn btn-outline-danger '> Delete </Link>
-     </div>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td >Larry the Bird</td>
-      <td >Haroun</td>
-      <td>@twitter</td>
-      <div className='d-flex justify-content-between' >
-        <Link href='#' className='btn btn-outline-success '> Edit </Link>
-        <Link href='#' className=' btn btn-outline-danger '> Delete </Link>
-     </div>
-    </tr>
-  </tbody>
-</table>
+<Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td colSpan={2}>Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </Table>
 </div>
 </div>
   )

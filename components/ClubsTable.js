@@ -1,54 +1,47 @@
 import React from 'react'
 import Link from 'next/link'
 import styles from '../styles/ClubsTable.module.css'
+import { Table } from 'react-bootstrap'
+import index from '../pages/admin/booking-management/index';
+import {Button} from 'react-bootstrap';
 
-function ClubsTable() {
+function ClubsTable({clubs}) {
   return (
 <div className={styles.container}>
 <div className={styles.wrapper}>
-<table class="table table-striped table-hover table-bordered border-black ">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <div className='d-flex justify-content-between' >
-        <Link href='#' className='btn btn-outline-success '> Edit </Link>
-        <Link href='#' className=' btn btn-outline-danger '> Delete </Link>
-     </div>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <div className='d-flex justify-content-between' >
-        <Link href='#' className='btn btn-outline-success '> Edit </Link>
-        <Link href='#' className=' btn btn-outline-danger '> Delete </Link>
-     </div>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td >Larry the Bird</td>
-      <td >Haroun</td>
-      <td>@twitter</td>
-      <div className='d-flex justify-content-between' >
-        <Link href='#' className='btn btn-outline-success '> Edit </Link>
-        <Link href='#' className=' btn btn-outline-danger '> Delete </Link>
-     </div>
-    </tr>
-  </tbody>
-</table>
+<Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Unique Identifier</th>
+          <th>Club Name</th>
+          <th>Registered Role</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {
+        clubs.map((club,index)=>(
+        <tr>
+          <td>{index}</td>
+          <td>{club._id}</td>
+          <td>{club.name}</td>
+          <td>{club.role}</td>
+          <td className='d-flex justify-content-between'>
+          <Button variant="outline-success">Edit</Button>{' '}
+          <Button variant="outline-danger">Delete</Button>{' '}
+          </td>
+          
+        </tr>
+    
+
+
+        ))
+
+      }
+
+      </tbody>
+    </Table>
 </div>
 </div>
   )

@@ -1,53 +1,37 @@
 import React from 'react'
 import styles from '../styles/BookingsTable.module.css'
 import Link from 'next/link'
-function BookingsTable() {
+import { Table } from 'react-bootstrap'
+function BookingsTable({bookings}) {
   return (
 <div className={styles.container}>
 <div className={styles.wrapper}>
-<table class="table table-striped table-hover table-bordered border-black">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <div className='d-flex justify-content-between' >
-        <Link href='#' className='btn btn-outline-success '> Edit </Link>
-        <Link href='#' className=' btn btn-outline-danger '> Delete </Link>
-     </div>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <div className='d-flex justify-content-between' >
-        <Link href='#' className='btn btn-outline-success '> Edit </Link>
-        <Link href='#' className=' btn btn-outline-danger '> Delete </Link>
-     </div>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td >Larry the Bird</td>
-      <td >Haroun</td>
-      <td>@twitter</td>
-      <div className='d-flex justify-content-between' >
-        <Link href='#' className='btn btn-outline-success '> Edit </Link>
-        <Link href='#' className=' btn btn-outline-danger '> Delete </Link>
-     </div>
-    </tr>
-  </tbody>
-</table>
+<Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Venue Name</th>
+          <th>Club Name</th>
+          <th>Booking Date</th>
+          <th>Expiry Date</th>
+        </tr>
+      </thead>
+      <tbody>
+      {
+        bookings.map((booking,index)=>(
+
+        <tr>
+          <td>{index}</td>
+          <td>{booking.venueName}</td>
+          <td>{booking.orgName}</td>
+          <td>{booking.bookingDate}</td>
+          <td>{booking.validUntil}</td>
+        </tr>
+        ))
+      }
+
+      </tbody>
+    </Table>
 </div>
 </div>
   )

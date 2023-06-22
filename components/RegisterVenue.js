@@ -1,9 +1,10 @@
 import React from 'react'
 import styles from '../styles/RegisterVenue.module.css'
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Alert from './Alert'
+
 
 function RegisterVenue() {
   const router = useRouter();
@@ -13,22 +14,33 @@ function RegisterVenue() {
     const [error , setError] = useState(null)
     const [success , setSuccess] = useState(null)
 
-    const handleAddVenue = ()=>{
+    const handleAddVenue = async()=>{
       const requestBody = {
         name,location,capacity
       }
         try {
-          const res = axios.post('http://localhost:3000/api/admin/venues',requestBody)
-          res.data && setSuccess(true)
-          success && router.push('/admin/venue-management/venues')
-        } catch (error) {
-          console.log(error)
-          error &&  router.push('/admin/venue-management/addVenue')
+          const res = await axios.post('http://localhost:3000/api/admin/venues',requestBody)
+           setSuccess(true)
+           setError(false)
+        } catch (err) {
           setError(true)
+          setSuccess(false)
+          setName("")
           
         }
 
     }
+    useEffect(() => {
+      if (success) {
+        router.push('/admin/venue-management/venues');
+      }
+    }, [success]);
+
+    useEffect(() => {
+      if (error) {
+        router.push('/admin/venue-management/addVenue');
+      }
+    }, [error]);
   return (
     <div>
 

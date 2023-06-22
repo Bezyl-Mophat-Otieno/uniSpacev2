@@ -5,6 +5,7 @@ import  org2  from '@/public/org2.jpg';
 import LoginForm from '@/components/LoginForm';
 
 
+
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {

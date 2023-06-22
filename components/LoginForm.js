@@ -6,7 +6,9 @@ import { useRouter } from 'next/router'
 import { loginStart ,logout ,loginSuccess , loginFailure } from '@/redux/userSlice'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 import QRCodeGenerator from './QRCodeGenerator'
+import { Spinner } from 'react-bootstrap'
 function LoginForm() {
   const [name , setName] = useState("")
   const [passkey , setPasskey] = useState("")
@@ -14,32 +16,36 @@ function LoginForm() {
   const [error,setError]= useState("")
   const router = useRouter()
   const dispatch = useDispatch()
+  const {loading} = useSelector(state=>state.user)
+
   const handleLogin = async()=>{
     const requestBody = {
        name , passkey
     }
     try {
       dispatch(loginStart())
-
       const res = await axios.post('http://localhost:3000/api/org/login',requestBody)
       setSuccess(true)
       setError(false)   
       dispatch(loginSuccess())   
-      if(res.data.role === 'user'){
+      if(await res.data.role === 'user'){
         router.push('/user/dashboard')
       }
-      if(res.data.role === 'admin'){
+      if(await res.data.role === 'admin'){
         router.push('/admin/dashboard')
 
       }
 
     } catch (error) {
-      console.log(error)
+      alert(error)
       setSuccess(false)
       setError(true)
       dispatch(loginFailure())
+      alert(loading)
       
     }
+
+
     
 
   }
@@ -65,6 +71,7 @@ function LoginForm() {
           <button type="submit" className={styles.buttonLog} onClick={handleLogin}>Login</button>
           <div className={'d-flex justify-content-center flex-row text-center'}>
           {/* <QRCodeGenerator/> */}
+            { loading && ( <Spinner  animation='border' variant='primary'  />)}
           </div>
       </div>
     </div>

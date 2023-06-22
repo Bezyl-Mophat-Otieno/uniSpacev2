@@ -1,15 +1,17 @@
 import React from 'react'
 import styles from '@/styles/Register.module.css'
 import { useEffect,useState } from 'react'
+import { useRouter } from 'next/router'
 import axios from 'axios'
 import Alert from './Alert'
 
 function RegisterForm() {
   const [name,setName]= useState("")
   const [role,setRole]= useState("")
-  const [success,setSuccess]= useState("")
-  const [error,setError]= useState("")
+  const [success,setSuccess]= useState(null)
+  const [error,setError]= useState(null)
   const [registeredUser , setRegisteredUser] = useState(null)
+  const router = useRouter()
   const handleRegister = async()=>{
     const requestBody = {
       name,role
@@ -17,12 +19,13 @@ function RegisterForm() {
 
     try {
       const res = await axios.post('http://localhost:3000/api/admin/register',requestBody)
-      setRegisteredUser(res.data)
+      setRegisteredUser(await res.data)
 
-      setSuccess(true)
-      setError(false)
-      setName("")
-      setRole("")
+        setSuccess(true)
+        setError(false)
+        setName("")
+        setRole("")
+      success && router.push('/admin/club-management/clubs')
 
 
       
@@ -31,9 +34,23 @@ function RegisterForm() {
       setSuccess(false)
       setName("")
       setRole("")
+      error && router.push('/admin/club-management/addClub')
     }
 
   }
+
+
+  useEffect(() => {
+    if (success) {
+      router.push('/admin/club-management/clubs');
+    }
+  }, [success]);
+  useEffect(() => {
+    if (error) {
+      router.push('/admin/club-management/addClub');
+    }
+  }, [error]);
+
   return (
     <div className={styles.formContainer}>
     <div className={styles.card}>

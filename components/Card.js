@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from '../styles/Card.module.css'
 import org2 from '../public/org2.jpg'
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 const Cards = () => {
   // Sample data for cards
@@ -17,18 +19,29 @@ const Cards = () => {
         <h2>Featured Cards</h2>
         <div className={styles.cardContainer}>
           {cards.map((card) => (
-            <div key={card.id} className={styles.card}>
-              <img src={card.image} alt={card.title} className={styles.cardImage} />
-              <div className={styles.cardContent}>
-                <h3>{card.title}</h3>
-                <p>{card.description}</p>
-              </div>
-            </div>
+
+    <Card style={{ width: '18rem' }}>
+    <Card.Header>Venue</Card.Header>
+    <Card.Body>
+      <Card.Title>Venue Name</Card.Title>
+      <Card.Text>
+       Venu Location
+      </Card.Text>
+      <Button variant="primary">Go somewhere</Button>
+    </Card.Body>
+  </Card>
+ 
           ))}
         </div>
       </main>
       {/* ... Rest of the dashboard layout ... */}
     </div>
+
+
+
+   
+
+
   );
 };
 
