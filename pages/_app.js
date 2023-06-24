@@ -7,6 +7,10 @@ import {store , persistor} from "../redux/store";
 import { PersistGate } from 'redux-persist/integration/react';
 
 
+import {Ysabeau  } from 'next/font/google';
+
+const ysebeau = Ysabeau({ subsets: ['cyrillic-ext'] });
+
 
 export default function App({ Component, pageProps }) {
   useEffect(()=>{
@@ -14,6 +18,11 @@ export default function App({ Component, pageProps }) {
   },[])
   return (
     <>
+          <style jsx global>{`
+        html {
+          font-family: ${ysebeau.style.fontFamily};
+        }
+      `}</style>
       <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
       <Component {...pageProps} />

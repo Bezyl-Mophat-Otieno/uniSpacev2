@@ -1,57 +1,96 @@
-import React, { useState } from 'react';
-import styles from '../../../styles/Dashboard.module.css'
-import org2 from '../../../public/org2.jpg'
-import Image from 'next/image';
-import LoginForm from '@/components/LoginForm';
+import UserNav from '@/components/UserNav';
+import Link from 'next/link';
+import axios from 'axios'
+import { useState,useEffect } from 'react';
+import { Container } from 'react-bootstrap';
+import VenueCardClub from '@/components/VenueCardClub';
+import { useSelector } from 'react-redux';
 
-const Dashboard = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const ClubDashboard = ({venues}) => {
+  const [updateVenues,setupdateVenues] = useState([])
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const {user} = useSelector(state=>state.user)
 
+  // useEffect(() => {
+  //   // WebSocket connection
+  //   const socket = new WebSocket('ws://localhost:3000/api/websocket');
+
+  //   socket.addEventListener('message', (event) => {
+  //     // Handle incoming message
+  //     const message = JSON.parse(event.data);
+  //     // Update the venues state with the received data
+  //     setupdateVenues(message.venues);
+  //   });
+
+  //   return () => {
+  //     // Clean up the WebSocket connection on component unmount
+  //     socket.close();
+  //   };
+  // }, []);
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <h1 className='text-primary '>Welcome,User</h1>
-        {/* Add any additional header content as needed */}
-      </header>
-      <nav className={styles.nav}>
-        <div className={styles.navHeader}>
-          <button className={styles.menuButton} onClick={toggleMenu}>
-            {isMenuOpen ? 'Close' : 'Menu'}
-          </button>
+    <Container fluid >
+      {/* Header */}
+      <UserNav/>
+      {/* Content Section */}
+      <section>
+        <div className="row">
+          <div className="col-lg-3">
+            {/* Sidebar */}
+            <div className="card">
+              <div className="card-body">
+                {/* Club Information */}
+                <h5 className="card-title">Club Name</h5>
+                <p className="card-text">Club Description</p>
+                {/* Club Members */}
+                <h6 className="card-subtitle mb-2 text-muted">Members</h6>
+                <ul className="list-group">
+                  <li className="list-group-item">Member 1</li>
+                  <li className="list-group-item">Member 2</li>
+                  <li className="list-group-item">Member 3</li>
+                  {/* ... */}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-9">
+            {/* Main Content */}
+            <div className="card">
+              <div className="card-body ">
+                {/* Club Dashboard Content */}
+                <h5 className="card-title">Welcome {user.name} to the Club Dashboard</h5>
+                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+                <div className='row row-cols-3'>
+                {
+                  venues.map((venue)=>{
+                    return <VenueCardClub venue={venue}/>
+                  })
+                }
+                  </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <ul className={`${styles.navList} ${isMenuOpen ? styles.open : ''}`}>
-          <li><a href="#dashboard">Dashboard</a></li>
-          <li><a href="#club-management">Club Management</a></li>
-          <li><a href="#booking-management">Booking Management</a></li>
-          <li><a href="#venue-management">Venue Management</a></li>
-          <li><a href="#reports-analytics">Reports & Analytics</a></li>
-        </ul>
-      </nav>
-      <main className={styles.main}>
-
-      <div className={styles.content}>
-      <div className={styles.contentLeft}>
-      <div><h1>user  dashboard</h1></div>
-      </div>
-      <div className={styles.contentRight}>
-        <LoginForm/>
-      </div>
-      </div>
-      <h1> Normal User , Dashboard</h1>
-        
-
-        {/* Add body content as needed */}
-
-      </main>
-      <footer className={styles.footer}>
-        {/* Add footer content as needed */}
-      </footer>
-    </div>
+      </section>
+    </Container>
   );
 };
 
-export default Dashboard;
+export default ClubDashboard;
+
+
+export const getServerSideProps = async ()=>{
+
+  try {
+    const res = await axios.get("http://localhost:3000/api/admin/venues")
+
+    return {
+      props: {
+        venues: await res.data
+      }
+    }
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+

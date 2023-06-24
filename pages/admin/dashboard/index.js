@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import styles from '../../../styles/Dashboard.module.css'
 import AdminNav from '@/components/AdminNav';
 import BookingsTable from '@/components/BookingsTable';
+import axios from 'axios';
 
-const Dashboard = () => {
+
+const Dashboard = ({bookings}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const fromDashboard = true;
 
   return (
     <div className={styles.container}>
@@ -22,7 +25,7 @@ const Dashboard = () => {
       <div className='text-start h2 ms-5 fw-bold mb-1 mt-5 text-decoration-underline'> Booking Standings</div>
       <main className={styles.main}>
       <div className={styles.content}>
-      <BookingsTable/>
+      <BookingsTable fromDashboard={fromDashboard} bookings={bookings}/>
       </div>
         
 
@@ -37,3 +40,18 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+export const getServerSideProps = async ()=>{
+
+  try {
+    const res = await axios.get("http://localhost:3000/api/admin/bookings")
+
+    return {
+      props: {
+        bookings: await res.data
+      }
+    }
+  } catch (error) {
+    console.log(error.message)
+  }
+}

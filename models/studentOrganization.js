@@ -16,6 +16,10 @@ const studentOrganizationSchema = new mongoose.Schema({
         type:String,
         default:"user"
     },
+    venueAssignment:{
+        type:Boolean,
+        default:false
+    },
     passkey: {  
         type: String,
         required: true,

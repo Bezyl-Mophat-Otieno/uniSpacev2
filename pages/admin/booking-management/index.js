@@ -4,11 +4,12 @@ import AdminNav from '@/components/AdminNav'
 import axios from 'axios'
 import BookingsTable from '@/components/BookingsTable'
 function index({bookings}) {
+  const fromDashboard = false;
   return (
     <>
     <AdminNav/>
     {/* <div className='ms-3 row row-cols-4 me-3'> */}
-    <BookingsTable bookings={bookings}/>
+    <BookingsTable fromDashboard={fromDashboard} bookings={bookings}/>
     {/* </div> */}
     </>
   )

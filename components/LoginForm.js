@@ -27,7 +27,7 @@ function LoginForm() {
       const res = await axios.post('http://localhost:3000/api/org/login',requestBody)
       setSuccess(true)
       setError(false)   
-      dispatch(loginSuccess())   
+      dispatch(loginSuccess(res.data))   
       if(await res.data.role === 'user'){
         router.push('/user/dashboard')
       }
@@ -37,11 +37,9 @@ function LoginForm() {
       }
 
     } catch (error) {
-      alert(error)
       setSuccess(false)
       setError(true)
       dispatch(loginFailure())
-      alert(loading)
       
     }
 

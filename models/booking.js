@@ -13,15 +13,6 @@ const BookingSchema = new mongoose.Schema({
   bookingDate: {
     type: Date,
     required: true,
-    validate: {
-      validator: function (value) {
-        const today = new Date();
-        // bookings can be made in a maximum window of 2days from the current time .
-        const twoDaysAhead = new Date(today.getTime() + 2 * 24 * 60 * 60 * 1000);
-        return value >= today && value <= twoDaysAhead;
-      },
-      message: 'Booking date must be within the allowed two-day window.',
-    },
   },
   validUntil: {
     type: Date,
@@ -29,7 +20,7 @@ const BookingSchema = new mongoose.Schema({
     default: function () {
       const bookingDate = this.bookingDate || new Date();
       // Bookings availbale for only 12 hours
-      return new Date(bookingDate.getTime() + 1 * 12 * 60 * 60 * 1000);
+      return new Date(bookingDate.getTime() + 1 * 24 * 60 * 60 * 1000);
     },
   },
 });
