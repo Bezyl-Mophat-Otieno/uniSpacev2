@@ -29,6 +29,7 @@ function VenueCard({button,venue , setDeleteSuccess , setDeleteFail }) {
     try {
        await axios.put(`http://localhost:3000/api/admin/venues/disable/${venue._id}`)
        setDisableSuccess(true)
+       setEnableSuccess(false)
        setVenueAvailability(!venue.isAvailable)
        
       } catch (error) {
@@ -40,6 +41,7 @@ function VenueCard({button,venue , setDeleteSuccess , setDeleteFail }) {
       try {
         await axios.put(`http://localhost:3000/api/admin/venues/enable/${venue._id}`)
         setEnableSuccess(true)
+        setDisableSuccess(false)
         setVenueAvailability(!venue.isAvailable)
 
       
