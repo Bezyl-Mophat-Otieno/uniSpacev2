@@ -16,6 +16,9 @@ const studentOrganizationSchema = new mongoose.Schema({
         type:String,
         default:"user"
     },
+    clubDesc:{
+        type:String,
+    },
     venueAssignment:{
         type:Boolean,
         default:false
@@ -24,6 +27,10 @@ const studentOrganizationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    executives:{
+        type:[{name:{type:String, required:true},regNo:{type:String, required:true},title:{type:String, required:true},phoneNo:{type:String, required:true}}],
+        default:[]
+    }
 
 })
 

@@ -1,13 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
-import styles from '../styles/AdminNav.module.css'
-import Container from 'react-bootstrap/Container';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { logout } from '@/redux/userSlice';
+import { useDispatch } from 'react-redux';
+import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+import Alert from './Alert';
+
+
+
+
+
 
 
 function AdminNav() {
+  const [logoutSuccess , setLogoutSuccess] = useState(false)
+    const router = useRouter()
+    const dispatch = useDispatch()
+    const handleLogout  = async()=>{
+      await axios.get('/api/logout')
+      dispatch(logout())
+      setLogoutSuccess(true)
+      router.push('/')
+    }
   return (
-
+<>
+<div className='d-flex justify-content-center'>
+ { logoutSuccess && <Alert message={'You are successfully logged-out'} color={'alert-success'}/>}
+</div>
 <Navbar bg="light" expand="lg">
   <div className="container-fluid">
     <Link className="navbar-brand fw-bolder mb-3 fs-5 "  href="/">uniSpace</Link>
@@ -35,8 +55,11 @@ function AdminNav() {
         </Link>
       </Nav>
     </Navbar.Collapse>
+  <span> <Button variant='outline-danger' className='text-end mb-3 me-0' onClick={handleLogout}> Logout </Button></span>
   </div>
+       
 </Navbar>
+</>
 
   )
 }

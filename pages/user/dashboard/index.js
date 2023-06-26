@@ -1,4 +1,5 @@
 import UserNav from '@/components/UserNav';
+import styles from '@/styles/SetPassword.module.css'
 import Link from 'next/link';
 import axios from 'axios'
 import { useState,useEffect } from 'react';
@@ -6,10 +7,13 @@ import { Container } from 'react-bootstrap';
 import VenueCardClub from '@/components/VenueCardClub';
 import { useSelector } from 'react-redux';
 
+
 const ClubDashboard = ({venues}) => {
+  const [displayField, setDisplayField] = useState(false)
   const [updateVenues,setupdateVenues] = useState([])
 
   const {user} = useSelector(state=>state.user)
+  const executives = user?.executives;
 
   // useEffect(() => {
   //   // WebSocket connection
@@ -39,14 +43,19 @@ const ClubDashboard = ({venues}) => {
             <div className="card">
               <div className="card-body">
                 {/* Club Information */}
-                <h5 className="card-title">Club Name</h5>
-                <p className="card-text">Club Description</p>
+                <h5 className="card-title">{user.name}</h5>
                 {/* Club Members */}
-                <h6 className="card-subtitle mb-2 text-muted">Members</h6>
+                <h6 className="card-subtitle mb-2 text-muted">Executive Officials</h6>
                 <ul className="list-group">
-                  <li className="list-group-item">Member 1</li>
-                  <li className="list-group-item">Member 2</li>
-                  <li className="list-group-item">Member 3</li>
+                {
+                  executives.map((executive)=>(
+                    <div className='d-flex justify-content-center '>
+                     <li className="list-group-item btn btn-outline-warning  w-100 text-start fw-bolder">{executive.title}</li>
+                     <li className="list-group-item btn btn-outline-success  w-100 text-start">{executive.name}</li>
+                    </div>
+                  ))
+
+                }
                   {/* ... */}
                 </ul>
               </div>
@@ -57,8 +66,10 @@ const ClubDashboard = ({venues}) => {
             <div className="card">
               <div className="card-body ">
                 {/* Club Dashboard Content */}
-                <h5 className="card-title">Welcome {user.name} to the Club Dashboard</h5>
-                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h5 className="card-title">Welcome {user?.name} to the Club Dashboard</h5>
+            <div className={styles.formGroup}>
+            <textarea type="text" row={3} className={styles.input} id="description" placeholder="Add Club`s Description" onChange={(e)=>setDescription(e.target.value)}/>
+            </div> 
 
                 <div className='row row-cols-3'>
                 {
@@ -79,14 +90,27 @@ const ClubDashboard = ({venues}) => {
 export default ClubDashboard;
 
 
-export const getServerSideProps = async ()=>{
+export const getServerSideProps = async (context)=>{
+
+  const myCookie = context.req?.cookies || "";
+
+  if (myCookie.token !== process.env.TOKEN) {
+    return {
+      redirect: {
+        destination:"/",
+        permanent: false,
+      },
+    };
+  }
+
 
   try {
     const res = await axios.get("http://localhost:3000/api/admin/venues")
 
     return {
       props: {
-        venues: await res.data
+        venues: await res.data,
+
       }
     }
   } catch (error) {

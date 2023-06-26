@@ -1,6 +1,7 @@
 import dbConnect from "../../../../utils/mongodb";
 import StudentOrganization from "../../../../models/studentOrganization";
 import Admin from "@/models/admin";
+import cookie from 'cookie'
 
 
 // Login
@@ -25,8 +26,9 @@ export default async function handler(req, res) {
                             res.status(404).json("The User is Yet to be registered, kindly contact the Deens Office");
                         }else{
 
-                            if(name === orgAdmin.name){
-                            res.status(200).json(orgAdmin);
+                            if(passkey === orgAdmin.passkey){
+                               res.setHeader("Set-Cookie",cookie.serialize("token",process.env.TOKEN, {maxAge:60*60,sameSite:"strict",path:"/"}))      
+                               res.status(200).json(orgAdmin);
     
                             }else{
                             res.status(404).json("Invalid credentials");
@@ -35,9 +37,9 @@ export default async function handler(req, res) {
 
                 }else{
 
-                    if(name === orgUser.name){
+                    if(passkey === orgUser.passkey){                  
+                        res.setHeader("Set-Cookie",cookie.serialize("token",process.env.TOKEN, {maxAge:60*60,sameSite:"strict",path:"/"}))      
                         res.status(200).json(orgUser);
-
                         }else{
                         res.status(404).json("Invalid credentials");
                         }

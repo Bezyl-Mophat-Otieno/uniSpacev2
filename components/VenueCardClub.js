@@ -38,10 +38,11 @@ function VenueCardClub({venue}) {
   const handleBooking = async()=>{
 
     try {
-      const requestBody = { venueName:venue.name ,orgName:user , bookingDate:dateSelected }
+      const requestBody = { venueName:venue.name ,orgName:user.name , bookingDate:dateSelected }
 
-      await axios.put(`http://localhost:3000/api/org/book/${venue.name}`,requestBody)
+      await axios.put(`http://localhost:3000/api/org/book/${venue._id}`,requestBody)
       setBookingSuccess(true)
+
       
     } catch (error) {
       alert(error)
@@ -50,6 +51,8 @@ function VenueCardClub({venue}) {
     }
     
   }
+
+
 
   return (
 <div class="col mb-5 mt-5 ">
@@ -65,8 +68,9 @@ function VenueCardClub({venue}) {
         //Check the booking status of the card 
         !venue.bookedStatus ? (
           // Check if the calender should be displayed 
-          !displayCalender && 
-          <Button variant='primary' onClick={()=>setDisplayCalender(true)}>Choose Booking Date</Button>
+          !displayCalender && venue.isAvailable ?
+          <Button variant='primary' onClick={()=>setDisplayCalender(true)}>Choose Booking Date</Button> :
+          <Button variant='primary' onClick={()=>setDisplayCalender(true) } disabled>Choose Booking Date</Button>
         ):(
           <input className={styles.input} disabled value={'Booked By...'}/>
         )
