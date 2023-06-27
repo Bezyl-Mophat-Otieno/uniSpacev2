@@ -1,11 +1,12 @@
 import UserNav from '@/components/UserNav';
-import styles from '@/styles/SetPassword.module.css'
 import Link from 'next/link';
+import styles from '../../../styles/clubDashboard.module.css'
 import axios from 'axios'
 import { useState,useEffect } from 'react';
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import VenueCardClub from '@/components/VenueCardClub';
 import { useSelector } from 'react-redux';
+import AddClubDescription from '@/components/AddClubDescription';
 
 
 const ClubDashboard = ({venues}) => {
@@ -13,39 +14,24 @@ const ClubDashboard = ({venues}) => {
   const [updateVenues,setupdateVenues] = useState([])
 
   const {user} = useSelector(state=>state.user)
-  const executives = user?.executives;
+  const executives = user===null? [] : user.executives;
 
-  // useEffect(() => {
-  //   // WebSocket connection
-  //   const socket = new WebSocket('ws://localhost:3000/api/websocket');
 
-  //   socket.addEventListener('message', (event) => {
-  //     // Handle incoming message
-  //     const message = JSON.parse(event.data);
-  //     // Update the venues state with the received data
-  //     setupdateVenues(message.venues);
-  //   });
-
-  //   return () => {
-  //     // Clean up the WebSocket connection on component unmount
-  //     socket.close();
-  //   };
-  // }, []);
   return (
-    <Container fluid >
+    <Container className={styles.background} fluid >
       {/* Header */}
       <UserNav/>
       {/* Content Section */}
-      <section>
+      <section className='mt-5'>
         <div className="row">
           <div className="col-lg-3">
             {/* Sidebar */}
             <div className="card">
               <div className="card-body">
                 {/* Club Information */}
-                <h5 className="card-title">{user.name}</h5>
+                <h5 className="card-title">{user == null ? "":user.name }</h5>
                 {/* Club Members */}
-                <h6 className="card-subtitle mb-2 text-muted">Executive Officials</h6>
+                <h6 className={`card-subtitle ${styles.sideCard} mb-2 text-muted`}>Executive Officials</h6>
                 <ul className="list-group">
                 {
                   executives.map((executive)=>(
@@ -66,10 +52,10 @@ const ClubDashboard = ({venues}) => {
             <div className="card">
               <div className="card-body ">
                 {/* Club Dashboard Content */}
-                <h5 className="card-title">Welcome {user?.name} to the Club Dashboard</h5>
-            <div className={styles.formGroup}>
-            <textarea type="text" row={3} className={styles.input} id="description" placeholder="Add Club`s Description" onChange={(e)=>setDescription(e.target.value)}/>
-            </div> 
+                <h5 className="card-title">Welcome {user == null? "": user.name} to the Club Dashboard</h5>
+                 {user===null? "": user.clubDesc===undefined ? <AddClubDescription user={user}/> : user.clubDesc }
+
+            
 
                 <div className='row row-cols-3'>
                 {

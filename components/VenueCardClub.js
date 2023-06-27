@@ -9,17 +9,16 @@ import axios from 'axios'
 import BookingForm from './BookingForm'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
-import { set } from 'mongoose'
 
 function VenueCardClub({venue}) {
   const router = useRouter()
   const [dateSelected , setDateSelected] = useState("")
   const [displayCalender,setDisplayCalender] =useState(false)
   const [invalidDateSelecton,setinvalidDateSelecton] = useState(false)
+  const {user} = useSelector(state=>state.user)
   const [bookingSuccess , setBookingSuccess] = useState(false)
   const today = new Date();
   const twoDaysAhead = new Date();
-  const {user} = useSelector(state=>state.user)
   twoDaysAhead.setDate(twoDaysAhead.getDate()+2)
   const handleChange = (e)=>{
     setDateSelected(e.target.value)
@@ -66,24 +65,32 @@ function VenueCardClub({venue}) {
       </Card.Text>
       {
         //Check the booking status of the card 
-        !venue.bookedStatus ? (
+        !venue.bookedStatus? (
           // Check if the calender should be displayed 
-          !displayCalender && venue.isAvailable ?
-          <Button variant='primary' onClick={()=>setDisplayCalender(true)}>Choose Booking Date</Button> :
-          <Button variant='primary' onClick={()=>setDisplayCalender(true) } disabled>Choose Booking Date</Button>
+          !displayCalender && (
+          venue.isAvailable ?
+          ( !user.venueAssignment ? <Button className={styles} onClick={()=>setDisplayCalender(true)}>Choose Booking Date</Button> : <Button className={styles.bookAction} onClick={()=>setDisplayCalender(true)} disabled>Choose Booking Date</Button>):
+          <Button variant=' btn-outline-secondary' className='text-center border-2 border-secondary text-secondary' disabled>Venue Temporarily Unavailable</Button>
+          ) 
         ):(
-          <input className={styles.input} disabled value={'Booked By...'}/>
+          // Display the booked by name
+          <input className={`text-center border-2 border-success text-success ${styles.input}`} disabled value={'Booked'}/>
+
+          
         )
-        // display the calender on the button click
+        // display the calender on the Button click
       }
       
     { displayCalender && 
     <>
     <input className={styles.input} type='date' value={dateSelected} onChange={(e)=>handleChange(e)} />
     {
-      !invalidDateSelecton ? <Button className={styles.input} variant='primary' onClick={handleBooking} >Book Now</Button> :
-      <>
-      <Button className={styles.input} variant='primary' onClick={()=>handleBooking} disabled>Book Now</Button>
+
+      !invalidDateSelecton ? <Button className={styles} variant='primary' onClick={handleBooking} >Book Now</Button> :
+      <> 
+      
+     <Button className={styles.bookAction} variant='primary'  onClick={()=>handleBooking} disabled>Book Now</Button>     
+      
       { (!dateSelected == "" && invalidDateSelecton ) && <div className='text-center text-danger fw-bold'> Invalid Date selected </div> }
       </>
 

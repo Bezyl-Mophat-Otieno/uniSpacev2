@@ -23,6 +23,10 @@ const venueSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
       },
+      bookedBy: {
+        type:String,
+        
+      }
 
 })
 

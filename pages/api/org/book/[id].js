@@ -14,7 +14,7 @@ export default async function handler(req, res) {
    if(method === "PUT"){
     const {venueName , orgName , bookingDate} = req.body
 
-    const changedBookedStatus = {bookedStatus:true}
+    const changedBookedStatus = {bookedStatus:true,bookedBy:orgName}
     const VenueAssignStatus = {venueAssignment:true}
     
        try {
@@ -25,6 +25,7 @@ export default async function handler(req, res) {
             new:true,
             runValidators:true
         }) 
+
         const org = await studentOrganization.findOne({name:orgName})
         if(org.venueAssignment ){
           (res.status(401).json("You are not allowed to book more than 1 venue "))
@@ -42,6 +43,17 @@ export default async function handler(req, res) {
             } catch (error) {
             res.status(500).json(error.message)
             }
+   }
+
+   if(method === "GET"){
+    try {
+        const venueBooking = await Booking.findOne({orgName:id})
+        res.status(200).json(venueBooking) 
+   
+    } catch (error) {
+        res.status(error.statusCode).json(error.message)   
+    }
+    
    }
     
 

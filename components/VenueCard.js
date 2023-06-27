@@ -70,8 +70,8 @@ function VenueCard({button,venue , setDeleteSuccess , setDeleteFail }) {
     { button &&  <Button variant="primary"><Link href='/admin/booking-management/history/1' className='text-white text-decoration-none'> {button} </Link></Button>}
       {
         !button &&      <div className='d-flex justify-content-between'>
-         { <Button variant="success" onClick={venueAvailability ? handleDisable : handleEnable} > { venueAvailability ? "Disable Venue" : "Enable Venue"} </Button>}
-          <Button variant="danger" onClick={handleDelete}>Remove Venue</Button>
+         { <span className={styles.btnAction} onClick={venueAvailability ? handleDisable : handleEnable} > { venueAvailability ? "Disable Venue" : "Enable Venue"} </span>}
+          <span  className={`${styles.btnDelete}`} onClick={handleDelete}>Remove Venue</span>
           </div>
       }
   </Card.Body>

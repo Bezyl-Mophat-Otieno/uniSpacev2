@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Container, Navbar, Nav } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {useState,useEffect} from 'react'
 import {Button} from 'react-bootstrap';
 import axios from 'axios';
@@ -12,20 +12,33 @@ const UserNav = () => {
   const dispatch = useDispatch()
   const router = useRouter()
   const [logoutSuccess,setLogoutSuccess] = useState()
+  const [bookedVenue,setBookedVenue] = useState(null)
+  const {user} = useSelector(state=>state.user)
   const handleLogout  = async()=>{
     await axios.get('/api/logout')
     dispatch(logout())
     setLogoutSuccess(true)
     router.push('/')
   }
+  useEffect(()=>{
+    const fetchBooking = async ()=>{
+
+      try {
+        const res = await axios.get(`http://localhost:3000/api/org/book/${user.name}`)
+        setBookedVenue(res.data.venueName)  
+      } catch (error) {
+        
+      }
+      }
+      fetchBooking()
+  },[])
   return (
     <>
-
 <div className='d-flex justify-content-center'>
  { logoutSuccess && <Alert message={'You are successfully logged-out'} color={'alert-success'}/>}
 </div>
 
-    <Container fluid>
+    <Container  className='me-0 ms-0'  fluid>
       {/* Header */}
       <Navbar bg="light" expand="lg">
         <Navbar.Brand href="#"> <Link className='text-decoration-none text-secondary' href={'/user/dashboard'}> Club Dashboard</Link> </Navbar.Brand>
@@ -37,6 +50,11 @@ const UserNav = () => {
           </Nav>
         </Navbar.Collapse>
       <span> <Button variant='outline-danger' className='text-end mb-3 me-0' onClick={handleLogout}> Logout </Button></span>
+      {
+       
+      user===null?"":user.venueAssignment ? <span> <Button variant='outline-success ms-5' className='text-end mb-3 me-0' onClick={handleLogout}> {`${bookedVenue} Booked`} </Button></span> : ""
+
+      } 
       </Navbar>
   </Container>
 

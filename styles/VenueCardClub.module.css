@@ -1,6 +1,6 @@
 .card{
-    background-color: #fff;
-    width: 20rem;
+  background-color: #DEE7E7;
+  width: 20rem;
     border-radius: 10px;
     border: 1px solid rgb(143, 142, 142,0.5);
     
@@ -11,6 +11,36 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+  }
+  .bookAction {
+
+    width:100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    color:#DEE7E7;
+    background-color: #0C5E58;
+    cursor: pointer;
+    border:1px solid #004557;
+    border-radius: 10px;
+    padding:10px;
+    transition:all  0.4s ease-in-out;
+    /* #0C5E58 */
+
+  }
+  .bookAction :disabled {
+
+    width:100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    color:#DEE7E7;
+    background-color: rgb(12, 94, 88,0.1);
+    cursor: pointer;
+    border:1px solid #004557;
+    border-radius: 10px;
+    padding:10px;
+    transition:all  0.4s ease-in-out;
+    /* #0C5E58 */
+
   }
 .cardBody{
     cursor: pointer;

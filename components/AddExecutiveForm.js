@@ -1,4 +1,3 @@
-
 import React from 'react'
 import styles from '@/styles/SetPassword.module.css'
 import { useEffect,useState } from 'react'
@@ -7,6 +6,7 @@ import { Button } from 'react-bootstrap'
 import axios from 'axios'
 import Alert from './Alert'
 import { useSelector } from 'react-redux'
+
 
 function AddExecutiveForm() {
   const [name,setName]= useState("")
@@ -21,18 +21,23 @@ function AddExecutiveForm() {
   const {user} = useSelector(state=>state.user)
 
   const handleChange = (e)=>{
-    setRequestBody({...requestBody,[e.target.name]:e.target.value})
+    setRequestBody({...requestBody,[e.target.name]:e.target.value,clubId:user._id})
 
   }
+
+
 
   const handleAdd = async()=>{
     
     try {
-      await axios.put(`/api/org/add-exec/${user._id}`, requestBody)
+      await axios.put(`http://localhost:3000/api/org/add-exec/${user._id}`,requestBody)
+    
+       
       setSuccess(true)
       setError(false)
-      
+    
     } catch (error) {
+      alert(error)
 
       setSuccess(false)
       setError(true)
@@ -45,6 +50,11 @@ function AddExecutiveForm() {
   useEffect(() => {
     if (success) {
       router.push('/user/dashboard');
+      socket.emit("addExecutive","I am a new executive")
+      socket.on("addExecutive",(message)=>{
+        alert("I am the server I have recieved your message")
+      })
+  
     }
   }, [success]);
   useEffect(() => {

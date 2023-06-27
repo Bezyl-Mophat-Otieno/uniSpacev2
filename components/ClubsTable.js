@@ -14,6 +14,7 @@ function ClubsTable({clubs}) {
         <tr>
           <th>#</th>
           <th>Unique Identifier</th>
+          <th>Passkey</th>
           <th>Club Name</th>
           <th>Registered Role</th>
           <th>Action</th>
@@ -25,6 +26,7 @@ function ClubsTable({clubs}) {
         <tr>
           <td>{index}</td>
           <td>{club._id}</td>
+          <td>{club.passkey}</td>
           <td>{club.name}</td>
           <td>{club.role}</td>
           <td className='d-flex justify-content-between'>

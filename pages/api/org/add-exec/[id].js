@@ -1,28 +1,24 @@
-import StudentOrganization from '../../../../models/studentOrganization'
-import dbConnect from '../../../../utils/mongodb'
+import StudentOrganization from '@/models/studentOrganization';
+import dbConnect from '@/utils/mongodb';
 export  default async function handler  (req,res){
+    const {method,query:{id}} = req;
+    // Creating a connection
+    await dbConnect();
+    if(method === 'PUT'){
 
-   const {method,query:{id}} = req;
+        
+        try {
 
-   await dbConnect()
+    await StudentOrganization.findByIdAndUpdate(
+        id,
+        {$push:{executives:req.body}})
+        res.status(200).json('Executives Added Successfully')
 
-
-    // updating a Organization information by the Representative
-   if(method === "PUT"){
-     try {
-
-        await StudentOrganization.findByIdAndUpdate(id,{
-         $push:{executives:req.body}
-        },{
-            new:true,
-            runValidators:true
-        })    
-        res.status(200).json({message:"Executive Added successfully"})
-     } catch (error) {
-        res.status(error.status).json({message:error.message})
-     }
     
-   }
-
-
+  } catch (error) {
+      res.status(400).json('Error Adding the executives')
+      
+    }
+    
 }
+        }

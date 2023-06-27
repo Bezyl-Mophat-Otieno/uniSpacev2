@@ -3,7 +3,10 @@ import styles from '../../../../styles/AddClubPage.module.css'
 import UserNav from '@/components/UserNav'
 import AddExecutiveForm from '@/components/AddExecutiveForm'
 
+import { useEffect } from 'react'
+
 function AddClubPage() {
+
   return (
     <>
     <UserNav/>
