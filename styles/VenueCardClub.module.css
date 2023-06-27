@@ -12,7 +12,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
-  .bookAction {
+  .bookAction{
 
     width:100%;
     margin-top: 10px;
@@ -27,21 +27,7 @@
     /* #0C5E58 */
 
   }
-  .bookAction :disabled {
 
-    width:100%;
-    margin-top: 10px;
-    border-radius: 10px;
-    color:#DEE7E7;
-    background-color: rgb(12, 94, 88,0.1);
-    cursor: pointer;
-    border:1px solid #004557;
-    border-radius: 10px;
-    padding:10px;
-    transition:all  0.4s ease-in-out;
-    /* #0C5E58 */
-
-  }
 .cardBody{
     cursor: pointer;
     transition:all  0.4s ease-in-out;

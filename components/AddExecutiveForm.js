@@ -8,7 +8,7 @@ import Alert from './Alert'
 import { useSelector } from 'react-redux'
 import socket from './socketClientConnect'
 import { useDispatch } from 'react-redux'
-import { addingFailure , addingStart ,  addingSuccess } from '@/redux/executiveSlice'
+import { updateUser } from '@/redux/userSlice'
 
 
 
@@ -23,6 +23,7 @@ function AddExecutiveForm() {
   const [error,setError]= useState(null)
   const router = useRouter()
   const {user} = useSelector(state=>state.user)
+  const dispatch = useDispatch()
 
   const handleChange = (e)=>{
     setRequestBody({...requestBody,[e.target.name]:e.target.value,clubId:user._id})
@@ -53,6 +54,11 @@ function AddExecutiveForm() {
   }
   useEffect(() => {
     if (success) {
+      const fetchClubUpdate = async () => {
+        const res = await axios.get(`http://localhost:3000/api/admin/register/${user._id}`)
+        dispatch(updateUser(res.data))    
+      }
+      fetchClubUpdate()
       router.push('/user/dashboard');
     }
   }, [success]);

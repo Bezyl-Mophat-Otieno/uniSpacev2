@@ -25,7 +25,7 @@ function AdminNav() {
     }
   return (
 <>
-<div className='d-flex justify-content-center'>
+<div className='d-flex justify-content-center mt-3'>
  { logoutSuccess && <Alert message={'You are successfully logged-out'} color={'alert-success'}/>}
 </div>
 <Navbar bg="light" expand="lg">
@@ -55,7 +55,7 @@ function AdminNav() {
         </Link>
       </Nav>
     </Navbar.Collapse>
-  <span> <Button variant='outline-danger' className='text-end mb-3 me-0' onClick={handleLogout}> Logout </Button></span>
+  <span> <Button variant='outline-danger' className='text-end mb-3 me-5' onClick={handleLogout}> Logout </Button></span>
   </div>
        
 </Navbar>

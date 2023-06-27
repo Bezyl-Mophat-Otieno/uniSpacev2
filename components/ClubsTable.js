@@ -30,8 +30,8 @@ function ClubsTable({clubs}) {
           <td>{club.name}</td>
           <td>{club.role}</td>
           <td className='d-flex justify-content-between'>
-          <Button variant="outline-success">Edit</Button>{' '}
-          <Button variant="outline-danger">Delete</Button>{' '}
+          <Button variant="outline-success">Comming Soon</Button>{' '}
+          <Button variant="outline-danger">Comming Soon</Button>{' '}
           </td>
           
         </tr>

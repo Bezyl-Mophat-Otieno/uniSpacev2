@@ -5,6 +5,8 @@ const server = http.createServer(app)
 const axios = require('axios')
 
 
+
+
 const {Server} = require('socket.io')
 const io = new Server (server,{
   cors:{
@@ -15,10 +17,10 @@ const io = new Server (server,{
 io.on("connection",(socket)=>{
   console.log("client  connected Successfully")
   socket.on("addExecutive",(clubId)=>{
-    console.log("addExecutive event recieved" + clubId)
+    console.log("addExecutive event recieved " + clubId)
     const fetchClub = async()=>{
       const res = await axios.get(`http://localhost:3000/api/admin/register/${clubId}`)
-      const club =await res.data
+      const club = await res.data
       socket.emit("updatedClubExecutives",club)
     }
     fetchClub()
@@ -31,3 +33,5 @@ io.on("connection",(socket)=>{
 server.listen(3001,()=>{
   console.log("socket server listening on port 3001")
 })
+
+// socket.emit('addExecutive',user._id)   

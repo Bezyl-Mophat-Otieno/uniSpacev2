@@ -1,0 +1,11 @@
+.card{
+    background-color: #DEE7E7;
+    color:#004557;    width: 20rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.2);
+    
+}
+.cardBody:hover {
+
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.2);
+  }

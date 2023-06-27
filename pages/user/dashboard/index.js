@@ -12,12 +12,11 @@ import socket from '@/components/socketClientConnect';
 
 const ClubDashboard = ({venues}) => {
   const [displayField, setDisplayField] = useState(false)
-  const [updateVenues,setupdateVenues] = useState([])
+  const [updateVenues,setupdateVenues] = useState(venues)
   
   const {user} = useSelector(state=>state.user)
-  const [executives,setExecutives] = useState(user === null ? [] :user.executives)
- 
-
+  const [executives,setExecutives] = useState(user === null ? [] : user.executives)
+  const [loggedInUser,setLoggedInUser] = useState(user)
 
   return (
     <Container className={styles.background} fluid >
@@ -55,14 +54,14 @@ const ClubDashboard = ({venues}) => {
               <div className="card-body ">
                 {/* Club Dashboard Content */}
                 <h5 className="card-title">Welcome {user == null? "": user.name} to the Club Dashboard</h5>
-                 {user===null? "": user.clubDesc===undefined ? <AddClubDescription user={user}/> : user.clubDesc }
+                 {user===null? "": loggedInUser.clubDesc === undefined ? <AddClubDescription user={user} setLoggedInUser={setLoggedInUser} /> : loggedInUser.clubDesc }
 
             
 
                 <div className='row row-cols-3'>
                 {
-                  venues.map((venue)=>{
-                    return <VenueCardClub venue={venue}/>
+                  updateVenues.map((venue)=>{
+                    return <VenueCardClub setupdateVenues={setupdateVenues} venue={venue}/>
                   })
                 }
                   </div>
@@ -94,7 +93,7 @@ export const getServerSideProps = async (context)=>{
 
   try {
     const res = await axios.get("http://localhost:3000/api/admin/venues")
-
+    
     return {
       props: {
         venues: await res.data,
