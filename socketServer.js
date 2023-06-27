@@ -2,6 +2,8 @@ const express = require ('express')
 const http = require ('http')
 const app = express()
 const server = http.createServer(app)
+const axios = require('axios')
+
 
 const {Server} = require('socket.io')
 const io = new Server (server,{
@@ -12,19 +14,18 @@ const io = new Server (server,{
 
 io.on("connection",(socket)=>{
   console.log("client  connected Successfully")
-  socket.on("message",(message)=>{
-    console.log("recieved Message " + message.toString())
-    socket.broadcast.emit("message","I am fine and you")
+  socket.on("addExecutive",(clubId)=>{
+    console.log("addExecutive event recieved" + clubId)
+    const fetchClub = async()=>{
+      const res = await axios.get(`http://localhost:3000/api/admin/register/${clubId}`)
+      const club =await res.data
+      socket.emit("updatedClubExecutives",club)
+    }
+    fetchClub()
   })
-  socket.on("news",(message)=>{
-    console.log("Recieved Message "+ message.toString())
-    io.emit('news', " Wow congratulations man")
+  
 
-  })
-  socket.on("addExecutive",(message)=>{
-    console.log("Recieved Message "+ message)
-    socket.broadcast.emit('addExecutive', " I am a new executive")
-  })
+  
 })
 
 server.listen(3001,()=>{

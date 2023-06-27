@@ -4,8 +4,7 @@ import styles from '@/styles/Home.module.css'
 import  org2  from '@/public/org2.jpg';
 import LoginForm from '@/components/LoginForm';
 import { useEffect } from 'react';
-// import { io } from 'socket.io-client';
-// const socket = io("http://localhost:3001")
+
 
 
 
@@ -26,6 +25,7 @@ export default function Home() {
   
   // },[])
 
+ 
 
 
 

@@ -16,6 +16,7 @@ function VenueCardClub({venue}) {
   const [displayCalender,setDisplayCalender] =useState(false)
   const [invalidDateSelecton,setinvalidDateSelecton] = useState(false)
   const {user} = useSelector(state=>state.user)
+
   const [bookingSuccess , setBookingSuccess] = useState(false)
   const today = new Date();
   const twoDaysAhead = new Date();
@@ -54,6 +55,8 @@ function VenueCardClub({venue}) {
 
 
   return (
+    <Link href={`http://localhost:3000/user/dashboard/booking-info/${venue.name}`}>
+
 <div class="col mb-5 mt-5 ">
 {bookingSuccess && <Alert message={'Venue Booked Successfully'} color={'alert-success'}/>}
     <Card className={styles.card} >
@@ -65,11 +68,11 @@ function VenueCardClub({venue}) {
       </Card.Text>
       {
         //Check the booking status of the card 
-        !venue.bookedStatus? (
+        !venue.bookedStatus === null ? "" : !venue.bookedStatus ? (
           // Check if the calender should be displayed 
           !displayCalender && (
           venue.isAvailable ?
-          ( !user.venueAssignment ? <Button className={styles} onClick={()=>setDisplayCalender(true)}>Choose Booking Date</Button> : <Button className={styles.bookAction} onClick={()=>setDisplayCalender(true)} disabled>Choose Booking Date</Button>):
+          ( user === null ? "": !user.venueAssignment ? <Button className={styles} onClick={()=>setDisplayCalender(true)}>Choose Booking Date</Button> : <Button className={styles.bookAction} onClick={()=>setDisplayCalender(true)} disabled>Choose Booking Date</Button>):
           <Button variant=' btn-outline-secondary' className='text-center border-2 border-secondary text-secondary' disabled>Venue Temporarily Unavailable</Button>
           ) 
         ):(
@@ -101,6 +104,7 @@ function VenueCardClub({venue}) {
    </Card.Body>
   </Card>
 </div>
+    </Link>
   )
 }
 

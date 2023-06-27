@@ -6,6 +6,10 @@ import { Button } from 'react-bootstrap'
 import axios from 'axios'
 import Alert from './Alert'
 import { useSelector } from 'react-redux'
+import socket from './socketClientConnect'
+import { useDispatch } from 'react-redux'
+import { addingFailure , addingStart ,  addingSuccess } from '@/redux/executiveSlice'
+
 
 
 function AddExecutiveForm() {
@@ -30,11 +34,11 @@ function AddExecutiveForm() {
   const handleAdd = async()=>{
     
     try {
+      
       await axios.put(`http://localhost:3000/api/org/add-exec/${user._id}`,requestBody)
-    
-       
       setSuccess(true)
       setError(false)
+      socket.emit('addExecutive',user._id)   
     
     } catch (error) {
       alert(error)
@@ -50,13 +54,9 @@ function AddExecutiveForm() {
   useEffect(() => {
     if (success) {
       router.push('/user/dashboard');
-      socket.emit("addExecutive","I am a new executive")
-      socket.on("addExecutive",(message)=>{
-        alert("I am the server I have recieved your message")
-      })
-  
     }
   }, [success]);
+ 
   useEffect(() => {
     if (error) {
       router.push('/user/dashboard/add-exec');

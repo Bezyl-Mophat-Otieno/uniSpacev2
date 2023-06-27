@@ -7,14 +7,16 @@ import { Button, Container } from 'react-bootstrap';
 import VenueCardClub from '@/components/VenueCardClub';
 import { useSelector } from 'react-redux';
 import AddClubDescription from '@/components/AddClubDescription';
+import socket from '@/components/socketClientConnect';
 
 
 const ClubDashboard = ({venues}) => {
   const [displayField, setDisplayField] = useState(false)
   const [updateVenues,setupdateVenues] = useState([])
-
+  
   const {user} = useSelector(state=>state.user)
-  const executives = user===null? [] : user.executives;
+  const [executives,setExecutives] = useState(user === null ? [] :user.executives)
+ 
 
 
   return (
