@@ -7,7 +7,7 @@ import Alert from './Alert'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 
-function VenueCard({button,venue , setDeleteSuccess , setDeleteFail }) {
+function VenueCard({button,venue , setDeleteSuccess , setDeleteFail , setWarning }) {
   const router = useRouter()
   const [enableSuccess,setEnableSuccess] = useState(false)
   const [disableSuccess,setDisableSuccess] = useState(false)
@@ -69,10 +69,20 @@ function VenueCard({button,venue , setDeleteSuccess , setDeleteFail }) {
       </Card.Text>
     { button &&  <Button variant="primary"><Link href='/admin/booking-management/history/1' className='text-white text-decoration-none'> {button} </Link></Button>}
       {
-        !button &&      <div className='d-flex justify-content-between'>
+        !button &&(
+          venue.bookedStatus ? (
+            <div className='d-flex justify-content-between'>
+         { <span className={styles.btnAction} onClick={venueAvailability ? ()=> setWarning(true) : ()=> setWarning(true) } > { venueAvailability ? "Disable Venue" : "Enable Venue"} </span>}
+          <span  className={`${styles.btnDelete}`} onClick={()=>setWarning(true)}>Remove Venue</span>
+          </div>
+          ) : (
+            <div className='d-flex justify-content-between'>
          { <span className={styles.btnAction} onClick={venueAvailability ? handleDisable : handleEnable} > { venueAvailability ? "Disable Venue" : "Enable Venue"} </span>}
           <span  className={`${styles.btnDelete}`} onClick={handleDelete}>Remove Venue</span>
           </div>
+          )
+        
+        )
       }
   </Card.Body>
   </Card>

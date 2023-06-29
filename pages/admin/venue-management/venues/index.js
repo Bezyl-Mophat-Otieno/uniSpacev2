@@ -11,6 +11,8 @@ function index({venues}) {
   const router = useRouter()
   const [deleteSuccess,setDeleteSuccess] = useState(null)
   const [deletefail,setDeleteFail] = useState(null)
+  const [warning ,setWarning ] = useState(null)
+
   useEffect(()=>{
  
     router.push('/admin/venue-management/venues')
@@ -26,7 +28,13 @@ function index({venues}) {
               </div>
         
       } 
-       <div className='text-start h2 ms-5 mt-5 fw-bold mb-0 text-decoration-underline'> Venues Available For Bookings </div>
+        <div className='d-flex justify-content-center '>
+          {  
+           warning && <Alert action={setWarning} message={'Venue is Currently booked, try again later' } color={'alert-info'} url={'/admin/venue-management/venues'} />
+          }
+        </div>
+        
+       <div className='text-start h2 ms-5 mt-5  mb-0 text-decoration-underline'> Venues Available For Bookings </div>
             {/* <VenuesTable/> */}
       {
         <div className='d-flex justify-content-center w-50'>
@@ -38,7 +46,7 @@ function index({venues}) {
 
             {
               venues.map((venue)=>(
-                  <VenueCard setDeleteSuccess={setDeleteSuccess} setDeleteFail={setDeleteFail} venue={venue}/>
+                  <VenueCard setWarning={setWarning} setDeleteSuccess={setDeleteSuccess} setDeleteFail={setDeleteFail} venue={venue}/>
               ))
             }
 

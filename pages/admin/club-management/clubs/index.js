@@ -23,7 +23,7 @@ function index({clubs}) {
     <AdminNav/>
     <div className='d-flex justify-content-center'>
     {  
-      warning && <Alert action={setWarning} message={'Currently the club has an assigned Venue , try again later' } color={'alert-info'} url={'/admin/club-management/clubs'} />
+      warning && <Alert action={setWarning} message={'Club is currently assigned a venue, try again later' } color={'alert-info'} url={'/admin/club-management/clubs'} />
     }
     {  
       enableSuccess && <Alert action={setEnableSuccess} message={'Enabled Successfully , This club can now book a venue.' } color={'alert-success'} url={'/admin/club-management/clubs'} />

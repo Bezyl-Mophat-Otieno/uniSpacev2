@@ -44,7 +44,7 @@ const ClubDashboard = ({venues}) => {
                 </Link>
                 <ul className="list-group">
                 { 
-                  user.executives.length !== 0 &&
+                  user === null ? null:user.executives.length !== 0 &&
 
                 <div className='d-flex justify-content-center '>
                      <li className="list-group-item btn btn-outline-warning fw-bold w-100 text-start "> Executive Possition</li>

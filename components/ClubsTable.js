@@ -67,7 +67,7 @@ function ClubsTable({clubs , setDeleteSuccess , deleteSuccess ,disableSuccess , 
           <th>Unique Identifier</th>
           <th>Passkey</th>
           <th>Club Name</th>
-          <th>Registered Role</th>
+          <th>Role</th>
           <th>Action</th>
         </tr>
       </thead>
