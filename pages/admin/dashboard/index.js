@@ -22,7 +22,7 @@ const Dashboard = ({bookings}) => {
       <nav className={styles.nav}>
       <AdminNav/>
       </nav>
-      <div className='text-start h2 ms-5 fw-bold mb-1 mt-5 text-decoration-underline'> Booking Standings</div>
+      <div className='text-start h2 ms-5 mb-1 mt-5 text-decoration-underline'> Booking Standings</div>
       <main className={styles.main}>
       <div className={styles.content}>
       <BookingsTable fromDashboard={fromDashboard} bookings={bookings}/>

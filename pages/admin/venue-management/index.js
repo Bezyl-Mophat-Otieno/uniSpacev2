@@ -39,3 +39,22 @@ function index() {
 }
 
 export default index
+
+export const getServerSideProps = async (context)=>{
+
+  const myCookie = context.req?.cookies || "";
+
+  if (myCookie.token !== process.env.TOKEN) {
+    return {
+      redirect: {
+        destination:"/",
+        permanent: false,
+      },
+      props:{
+        venues:[]
+      }
+    };
+  }
+
+
+}

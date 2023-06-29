@@ -51,7 +51,18 @@ function index({venues}) {
 
 export default index
 
-export const getServerSideProps = async ()=>{
+export const getServerSideProps = async (context)=>{
+
+  const myCookie = context.req?.cookies || "";
+
+  if (myCookie.token !== process.env.TOKEN) {
+    return {
+      redirect: {
+        destination:"/",
+        permanent: false,
+      },
+    };
+  }
 
   try {
     const res = await axios.get("http://localhost:3000/api/admin/venues")
@@ -65,3 +76,5 @@ export const getServerSideProps = async ()=>{
     console.log(error.message)
   }
 }
+
+

@@ -30,7 +30,12 @@ const studentOrganizationSchema = new mongoose.Schema({
     executives:{
         type:[{name:{type:String, required:true},regNo:{type:String, required:true},title:{type:String, required:true},phoneNo:{type:String, required:true}}],
         default:[]
+    },
+    isActive:{
+        type:Boolean,
+        default:true
     }
+
 
 })
 

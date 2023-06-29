@@ -30,7 +30,7 @@ function AdminNav() {
 </div>
 <Navbar bg="light" expand="lg">
   <div className="container-fluid">
-    <Link className="navbar-brand fw-bolder mb-3 fs-5 "  href="/">uniSpace</Link>
+    <Link className="navbar-brand fw-bold mb-3 fs-5 "  href="/">uniSpace</Link>
     <Navbar.Toggle aria-controls="navbarSupportedContent" />
     <Navbar.Collapse id="navbarSupportedContent">
       <Nav className="me-auto mb-2 mb-lg-0">

@@ -89,7 +89,7 @@ function SetPasswordForm() {
             </div>
             <div className={styles.formGroup}>
             <input type="password" className={styles.input} id="passkey" placeholder="Confirm Your Passkey" onChange={(e)=>handleConfirmPassword(e)} />
-            {  typing ? (passwordMatch ? <Button className='w-100 mt-4' onClick={handleSetPasskey}> Set Passkey </Button> : <span className='text-center text-danger fw-bold'> Passkey do not Match</span>) : "" }
+            {  typing ? (passwordMatch ? <Button className='w-100 mt-4' onClick={handleSetPasskey}> Set Passkey </Button> : <span className='text-center text-danger '> Passkey do not Match</span>) : "" }
             
             </div>
      </>

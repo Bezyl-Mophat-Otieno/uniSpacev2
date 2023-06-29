@@ -7,3 +7,45 @@
     padding: 20px;
     margin:20px;
 }
+
+.btnDelete{
+  color:#004557;
+  background-color: #DEE7E7;
+  cursor: pointer;
+  border:1px solid #004557;
+  border-radius: 5px;
+  padding:10px;
+  transition:all  0.4s ease-in-out;
+  /* #0C5E58 */
+}
+.btnDelete:hover{
+  color:#DEE7E7;
+  background-color: #0C5E58;
+  cursor: pointer;
+  border:1px solid #004557;
+  border-radius: 5px;
+  padding:10px;
+  transition:all  0.4s ease-in-out;
+  /* #0C5E58 */
+}
+
+
+.btnAction{
+  color:#DEE7E7;
+  background-color: #0C5E58;
+  cursor: pointer;
+  border:1px solid #004557;
+  border-radius: 5px;
+  padding:10px;
+  transition:all  0.4s ease-in-out;
+  /* #0C5E58 */
+}
+.btnAction:hover{
+  color:#004557;
+  background-color: #DEE7E7;
+  cursor: pointer;
+  border:1px solid #004557;
+  border-radius: 5px;
+  padding:10px;
+  transition:all  0.4s ease-in-out;
+}

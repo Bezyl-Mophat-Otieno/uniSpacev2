@@ -14,7 +14,19 @@ function VenueBookHistory({bookings}) {
 
 export default VenueBookHistory
 
-export async function getServerSideProps({params}) {
+export async function getServerSideProps(context) {
+  const {params} = context;
+  const myCookie = context.req?.cookies || "";
+
+  if (myCookie.token !== process.env.TOKEN) {
+    return {
+      redirect: {
+        destination:"/",
+        permanent: false,
+      },
+    };
+  }
+  
 
   try {
 
@@ -31,4 +43,3 @@ export async function getServerSideProps({params}) {
 
 
 }
-

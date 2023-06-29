@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux'
 import { assignVenue , updateUser } from '@/redux/userSlice'
 
 
-function VenueCardClub({venue , setupdateVenues}) {
+function VenueCardClub({venue , setupdateVenues , active}) {
   const router = useRouter()
   const [dateSelected , setDateSelected] = useState("")
   const [displayCalender,setDisplayCalender] =useState(false)
@@ -108,12 +108,26 @@ function VenueCardClub({venue , setupdateVenues}) {
        {venue.location}
       </Card.Text>
       {
+        
         //Check the booking status of the card 
         !venue.bookedStatus === null ? "" : !venue.bookedStatus ? (
           // Check if the calender should be displayed 
           !displayCalender && (
           venue.isAvailable ?
-          ( user === null ? "": !user.venueAssignment ? <Button className={styles.input} variant='primary' onClick={()=>setDisplayCalender(true)}>Choose Booking Date</Button> : <Button className={styles.input} variant='primary' onClick={()=>setDisplayCalender(true)} disabled>Choose Booking Date</Button>):
+          ( user === null ? "": !user.venueAssignment ? (
+            user.isActive ? (
+          <Button className={styles.input} variant='primary' onClick={()=>setDisplayCalender(true)}>Choose Booking Date</Button> 
+
+            ) : (
+          <Button className={styles.input} variant='primary' onClick={()=>setDisplayCalender(true)} disabled>Choose Booking Date</Button> 
+
+            )
+           
+          ) : (
+            <Button className={styles.input} variant='primary' onClick={()=>setDisplayCalender(true)} disabled>Choose Booking Date</Button>
+            
+            )
+          ):
           <Button variant='btn-outline-secondary' className='text-center border-2 border-secondary text-secondary' disabled>Venue Temporarily Unavailable</Button>
           ) 
         ):(
@@ -140,7 +154,7 @@ function VenueCardClub({venue , setupdateVenues}) {
       
      <Button className={styles.input} variant='primary'  onClick={()=>handleBooking} disabled>Book Now</Button>     
       
-      { (!dateSelected == "" && invalidDateSelecton ) && <div className='text-center text-danger fw-bold'> Invalid Date selected </div> }
+      { (!dateSelected == "" && invalidDateSelecton ) && <div className='text-center text-danger '> Invalid Date selected </div> }
       </>
 
 

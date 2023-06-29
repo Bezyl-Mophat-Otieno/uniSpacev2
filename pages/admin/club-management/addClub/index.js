@@ -15,3 +15,23 @@ function AddClubPage() {
 
 export default AddClubPage
 
+
+
+// export const getServerSideProps = async (context)=>{
+
+//   const myCookie = context.req?.cookies || "";
+
+//   if (myCookie.token !== process.env.TOKEN) {
+//     return {
+//       redirect: {
+//         destination:"/",
+//         permanent: false,
+//       },
+//       props:{
+//         clubs:[]
+//       }
+//     };
+//   }
+
+
+// }

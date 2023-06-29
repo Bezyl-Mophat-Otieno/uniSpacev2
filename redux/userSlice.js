@@ -28,6 +28,7 @@ const userSlice = createSlice({
         updateUser:(state,action)=>{
             state.user = action.payload
         },
+
         assignVenue:(state,action)=>{
             state.bookedVenue = action.payload
         }
