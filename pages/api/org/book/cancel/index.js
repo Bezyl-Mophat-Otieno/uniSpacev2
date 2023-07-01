@@ -34,9 +34,7 @@ export default async function handler(req, res) {
 
         // Handle Booking
         const now = new Date()
-
         const booking = (await Booking.findOneAndDelete({orgName:orgName,validUntil:{$lt:now}}))
-        console.log(booking)
         res.status(200).json("All operations carried out successfully")
 
             } catch (error) {

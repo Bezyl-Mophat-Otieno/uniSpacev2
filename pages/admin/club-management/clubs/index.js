@@ -5,8 +5,10 @@ import axios from 'axios'
 import { useState , useEffect } from 'react'
 import{ useRouter } from 'next/router'
 import Alert from '@/components/Alert'
+import { useSelector } from 'react-redux'
 
 function index({clubs}) {
+  const {user} = useSelector(state=>state.user)
   const router = useRouter()
   const [deleteSuccess,setDeleteSuccess] = useState(null)
   const [deletefail,setDeleteFail] = useState(null)
@@ -14,10 +16,32 @@ function index({clubs}) {
   const [disableSuccess,setDisableSuccess] = useState(false)
   const [warning ,setWarning ] = useState(null)
   useEffect(()=>{
- 
-    router.push('/admin/club-management/clubs')
+    if(deleteSuccess || deletefail || enableSuccess || disableSuccess){
+      const fetchClubUpdate = async () => {
+        const res = await axios.get(`http://localhost:3000/api/admin/register/${user._id}`)
+        dispatch(updateUser(res.data))    
+      }
+      
+      const fetchBooking = async ()=>{
+        
+        try {
+          dispatch(assignVenue(null))  
+        } catch (error) {
+          
+        }
+      }
+
+       
      
-   },[deleteSuccess,disableSuccess,enableSuccess])
+      fetchClubUpdate()
+      fetchBooking()
+      
+      router.push('/admin/club-management/clubs')
+    }
+ 
+    
+     
+   },[deleteSuccess,enableSuccess , warning])
   return (
     <div>
     <AdminNav/>

@@ -1,6 +1,6 @@
 import dbConnect from "../../../../utils/mongodb";
 import StudentOrganization from "../../../../models/studentOrganization";
-import Admin from "@/models/admin";
+import Admin from "@/models/admin.js";
 import cookie from 'cookie'
 
 

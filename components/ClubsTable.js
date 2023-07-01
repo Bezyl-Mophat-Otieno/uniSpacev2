@@ -52,11 +52,6 @@ function ClubsTable({clubs , setDeleteSuccess , deleteSuccess ,disableSuccess , 
     }
   }
 
-  useEffect(()=>{
-    router.push('/admin/club-management/clubs')
-
-  },[  enableSuccess , disableSuccess , deleteSuccess])
-
   return (
 <div className={styles.container}>
 <div className={styles.wrapper}>

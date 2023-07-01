@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     // Fetch all the Bookings Made 
     if(method === 'GET'){
         try {
-         const allBookings = await Booking.find()
+         const allBookings = await Booking.find().sort({validUntil:-1})
          res.status(200).json(allBookings)
 
         } catch (error) {

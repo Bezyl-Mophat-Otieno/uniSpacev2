@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "socket": "nodemon socketServer.js",
+    "socket": "nodemon socketServer.mjs",
     "lint": "next lint"
   },
   "dependencies": {

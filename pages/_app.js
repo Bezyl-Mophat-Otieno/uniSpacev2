@@ -3,7 +3,7 @@ import '@/styles/globals.css'
 import "bootstrap/dist/css/bootstrap.min.css"; // Import bootstrap CSS
 import { useEffect } from "react";
 import { Provider } from 'react-redux';
-import {store , persistor} from "../redux/store";
+import {store , persistor} from "../redux/store.js";
 import { PersistGate } from 'redux-persist/integration/react';
 
 

@@ -31,7 +31,7 @@ function BookingsTable({bookings ,fromDashboard}) {
           <td>{moment(booking.bookingDate).format('MMMM Do YYYY, h:mm: a')}</td>
           <td className='position-relative'>{ moment(booking.validUntil).format('MMMM Do YYYY, h:mm: a')}
           {
-            moment(new Date()).format('MMMM Do YYYY, h:mm: a') < moment(booking.validUntil).format('MMMM Do YYYY, h:mm: a') && (
+            moment(new Date()) < moment(booking.validUntil) && (
                 <span class="position-absolute top-0 start-100 translate-middle p-0 bg-success border border-light rounded-pill">
                 <span class=" badge rounded-pill">active</span>
                 </span>
