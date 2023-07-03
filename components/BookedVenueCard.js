@@ -15,10 +15,12 @@ function BookedVenueCard({booking , setCancelSuccess}) {
     }
     try{
       await axios.put('http://localhost:3000/api/org/book/cancel',requestBody)
+      await axios.delete(`http://localhost:3000/api/admin/bookings/${booking._id}`)
+      alert('Booking deleted also successfully')
       setCancelSuccess(true)
       
-      
     }catch(err){
+      alert(err)
       setCancelSuccess(false)
     }
 

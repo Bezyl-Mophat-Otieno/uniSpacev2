@@ -40,16 +40,20 @@ function VenueCardClub({venue , setupdateVenues , active}) {
 // 
   const handleBooking = async()=>{
 
+    
+
     try {
-      const requestBody = { venueName:venue.name ,orgName:user.name , bookingDate:dateSelected }
 
-      await axios.put(`http://localhost:3000/api/org/book/${venue._id}`,requestBody)
-      
+      //check the status of the logged in User 
+      if(user.venueAssignment){
+        alert("You are already assigned a venue")
+        setBookingSuccess(false)
+      }else{
+        const requestBody = { venueName:venue.name ,orgName:user.name , bookingDate:dateSelected }
+        await axios.put(`http://localhost:3000/api/org/book/${venue._id}`,requestBody)
+        setBookingSuccess(true)  
         
-
-      setBookingSuccess(true)
-
-      
+      }
     } catch (error) {
       alert(error)
       setBookingSuccess(false)

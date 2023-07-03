@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     // Creating a connection
     await dbConnect();
 
-   //Booking a venue
+   //Cancelling  a venue Booking 
    if(method === "PUT"){
     const {venueName , orgName } = req.body
 
@@ -31,26 +31,12 @@ export default async function handler(req, res) {
             new:true,
             runValidators:true
           })
-
-        // Handle Booking
-        const now = new Date()
-        const booking = (await Booking.findOneAndDelete({orgName:orgName,validUntil:{$lt:now}}))
-        res.status(200).json("All operations carried out successfully")
+     
+        res.status(200).json("Cancellation was successfull")
 
             } catch (error) {
             res.status(500).json(error.message)
             }
-   }
-
-   if(method === "GET"){
-    try {
-        const venueBooking = await Booking.findOne({orgName:id})
-        res.status(200).json(venueBooking) 
-   
-    } catch (error) {
-        res.status(error.statusCode).json(error.message)   
-    }
-    
    }
     
 

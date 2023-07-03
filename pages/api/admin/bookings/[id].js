@@ -6,7 +6,7 @@ export  default async function handler  (req,res){
 
    await dbConnect()
 
-   // Getting all the list of venue booked with the name provided in the booking s table to server as history
+   // Getting all the list of venue booked with the name provided in the booking table to server as history
    if(method === "GET"){
     try {
         const venueBookings = await Booking.find({venueName:id})

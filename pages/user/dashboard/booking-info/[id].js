@@ -11,25 +11,24 @@ import { updateUser } from '@/redux/userSlice'
 import { assignVenue } from '@/redux/userSlice'
 
 
-function VenueBookHistory({bookings,}) {
+function VenueBookHistory({bookings}) {
   const dispatch = useDispatch()
   const {user} = useSelector(state=>state.user)
   const [cancelSuccess , setCancelSuccess] = useState(null)
 
-  const arraySize = bookings.length === 1 ? 0 : bookings.length;
+  const arraySize = bookings.length >=1 ? 0 : bookings.length;
 
   useEffect(()=>{
 
     if(cancelSuccess){
 
       const fetchClubUpdate = async () => {
-        const res = await axios.get(`http://localhost:3000/api/admin/register/${user._id}`)
-        dispatch(updateUser(res.data))    
+        const res = await axios.get(`http://localhost:3000/api/admin/register/${user===null?null:user._id}`)
+        dispatch(updateUser( await res.data))    
       }
       
       const fetchBooking = async ()=>{
-        
-        try {
+              try {
           dispatch(assignVenue(null))  
         } catch (error) {
           

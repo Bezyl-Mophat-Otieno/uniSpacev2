@@ -12,22 +12,6 @@ import { useEffect } from 'react';
 
 
 export default function Home() {
-  // useEffect(()=>{
-
-  //   socket.emit('message',"Hello There")
-  //   socket.on("message",(message)=>{
-  //     alert("recieved response" + message.toString());
-  //   })
-  //   socket.emit('news',"I did well in my exams")
-  //   socket.on("news",(message)=>{
-  //     alert("recieved response" + message.toString());
-  //   })
-  
-  // },[])
-
- 
-
-
 
   
   return (
@@ -50,8 +34,6 @@ export default function Home() {
         <Image src={org2} alt="Login" className={styles.image} />
       </div>
       <LoginForm/>
-      
-
     </div>
       </main>
     </>

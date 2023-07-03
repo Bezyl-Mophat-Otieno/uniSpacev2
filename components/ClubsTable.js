@@ -78,12 +78,12 @@ function ClubsTable({clubs , setDeleteSuccess , deleteSuccess ,disableSuccess , 
           {
             club.venueAssignment? 
         (<div className='d-flex justify-content-between'>
-         { <button  className={`disabled ${styles.btnAction}`} onClick={club.isActive ? ()=>setWarning(true):()=>setWarning(true)} > { club.isActive ? "Disable Venue" : "Enable Venue"} </button>}
+         { <button  className={`disabled ${styles.btnAction}`} onClick={club.isActive ? ()=>setWarning(true):()=>setWarning(true)} > { club.isActive ? "Disable Club" : "Enable Club"} </button>}
           <button   className={`${styles.btnDelete}`} onClick={()=>setWarning(true) }>Delete Club</button>
           </div>)
 
            : (<div className='d-flex justify-content-between'>
-         { <button   className={styles.btnAction} onClick={club.isActive ? ()=>handleDisable(club) :()=>handleEnable(club)} > { club.isActive ? "Disable Venue" : "Enable Venue"} </button>}
+         { <button   className={styles.btnAction} onClick={club.isActive ? ()=>handleDisable(club) :()=>handleEnable(club)} > { club.isActive ? "Disable Club" : "Enable Club"} </button>}
           <button   className={`${styles.btnDelete}`} onClick={()=>handleDelete(club) }>Delete Club</button>
           </div>)
       }

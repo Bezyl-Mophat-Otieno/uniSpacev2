@@ -6,10 +6,13 @@ import { useState , useEffect } from 'react'
 import{ useRouter } from 'next/router'
 import Alert from '@/components/Alert'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { updateUser ,  assignVenue } from '@/redux/userSlice'
 
 function index({clubs}) {
   const {user} = useSelector(state=>state.user)
   const router = useRouter()
+  const dispatch = useDispatch()
   const [deleteSuccess,setDeleteSuccess] = useState(null)
   const [deletefail,setDeleteFail] = useState(null)
   const [enableSuccess,setEnableSuccess] = useState(false)
@@ -18,7 +21,7 @@ function index({clubs}) {
   useEffect(()=>{
     if(deleteSuccess || deletefail || enableSuccess || disableSuccess){
       const fetchClubUpdate = async () => {
-        const res = await axios.get(`http://localhost:3000/api/admin/register/${user._id}`)
+        const res = await axios.get(`http://localhost:3000/api/admin/register/${user===null?null:user._id}`)
         dispatch(updateUser(res.data))    
       }
       

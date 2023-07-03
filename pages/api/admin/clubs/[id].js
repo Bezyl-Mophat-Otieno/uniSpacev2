@@ -68,7 +68,7 @@ export  default async function handler  (req,res){
                         }
                         console.log(`${result.deletedCount} document(s) deleted successfully`)
                     });
-  
+
             
             res.status(200).json({message:"Student Organization Deleted successfully"})
         } catch (error) {

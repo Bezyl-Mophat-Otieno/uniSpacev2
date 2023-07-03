@@ -21,14 +21,23 @@ export default async function handler(req, res) {
         
         // I will validate on the front end to ensure that a booked venue request for booking cannot  be sent
         const venue = await Venue.findById(id)
-        venue && await Venue.findByIdAndUpdate(id,changedBookedStatus,{
-            new:true,
-            runValidators:true
-        }) 
+        // Ensuring in the server side a venue can only be booked once 
+        if ( venue.bookedStatus) {
+          return res.status(401).json("Venue is already booked ")
+        }else{
 
+          await Venue.findByIdAndUpdate(id,changedBookedStatus,{
+              new:true,
+              runValidators:true
+          }) 
+
+        }
+
+
+        // Assigning a venue to a club 
         const org = await studentOrganization.findOne({name:orgName})
         if(org.venueAssignment ){
-          (res.status(401).json("You are not allowed to book more than 1 venue "))
+          (res.status(401).json("You are already assigned a venue"))
           
         }else{
           await studentOrganization.findOneAndUpdate({name:orgName},VenueAssignStatus,{
@@ -38,8 +47,7 @@ export default async function handler(req, res) {
           const bookingReceipt = await Booking.create({venueName,orgName,bookingDate})
             res.status(201).json(bookingReceipt)    
 
-        }
-        
+        }     
             } catch (error) {
             res.status(500).json(error.message)
             }
